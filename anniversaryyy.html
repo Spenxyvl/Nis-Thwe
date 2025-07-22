@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Anniversary</title>
+  <link rel="icon" href="https://i.ibb.co/hXZsYxZ/heart.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy&family=Sacramento&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Sour Gummy', sans-serif;
+      background: linear-gradient(145deg, #ffe0ec, #fffaf0);
+      overflow-x: hidden;
+    }
+    h1 {
+      font-family: 'Sacramento', cursive;
+      font-size: 3rem;
+      color: #ec407a;
+      text-align: center;
+      margin-top: 1rem;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .quote {
+      font-style: italic;
+      font-size: 1.3rem;
+      color: #d81b60;
+      text-align: center;
+      margin-top: -10px;
+      animation: fadeIn 2.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .page {
+      display: none;
+      padding: 2rem;
+      text-align: center;
+      transition: opacity 0.5s ease-in-out;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .active {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .avt {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin: 10px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, .2);
+    }
+    #days-section {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    #days-section div {
+      font-size: 28px;
+      color: #ec407a;
+    }
+    .time-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .time-part {
+      background: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: #ec407a;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin: 1rem;
+    }
+    .photo {
+      width: 90%;
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .photo-img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      filter: blur(5px) brightness(0%) saturate(0%);
+    }
+    .photo-img.is-developed {
+      animation: developPhoto 6s ease-in-out forwards;
+    }
+    @keyframes developPhoto {
+      0% { filter: blur(5px) brightness(0%) saturate(0%); }
+      100% { filter: blur(0) brightness(100%) saturate(100%); }
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body onclick="playAudio()">
+  <audio id="myAudio" autoplay muted loop>
+    <source src="FL.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Page 1 -->
+  <div id="page1" class="page active">
+    <h1>Happy 2 Months Anniversary, Myat Thwe 💗</h1>
+    <div class="quote">I want to be with you, always and forever 💞</div>
+
+<div style="display: flex; justify-content: center; gap: 40px;">
+  <div style="text-align: center;">
+    <img src="https://media.tenor.com/kFxWdKGFsJgAAAAj/bubu-dudu-sseeyall.gif" class="avt">
+    <p style="margin: 0.5rem 0 0; font-weight: bold;">My Prettiest!💗</p>
+  </div>
+  <div style="text-align: center;">
+    <img src="https://media.tenor.com/CNJSyzMIkskAAAAj/bubu-dudu-sseeyall.gif" class="avt">
+    <p style="margin: 0.5rem 0 0; font-weight: bold;">Me💗</p>
+  </div>
+</div>
+
+    <div id="days-section">
+      <div style="font-size: 64px;">❤</div>
+      <div><span id="daysTogether">0</span> days of us &lt;3</div>
+    </div>
+
+    <div class="time-container">
+      <div class="time-part" id="hours">00</div>:
+      <div class="time-part" id="minutes">00</div>:
+      <div class="time-part" id="seconds">00</div>
+    </div>
+
+    <button class="button" onclick="goToPage2()">Press me</button>
+  </div>
+
+  <!-- Page 2 -->
+  <div id="page2" class="page">
+    <h1>Tap the camera to see more bae💗</h1>
+    <div class="photo">
+      <img src="" class="photo-img js-photo-img" />
+    </div>
+    <button class="button js-develop-button">📸</button>
+    <button class="button" onclick="goToPage1()">↩️</button>
+  </div>
+
+  <script>
+    // Autoplay music when loaded
+    const audio = document.getElementById("myAudio");
+    window.addEventListener("DOMContentLoaded", function () {
+      setTimeout(() => {
+        audio.muted = false;
+        audio.play().catch(() => {});
+      }, 500);
+    });
+
+    // Fallback if autoplay is blocked
+    function playAudio() {
+      audio.muted = false;
+      audio.play().catch(() => {});
+    }
+
+    // Clock
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("hours").textContent = String(now.getHours()).padStart(2, '0');
+      document.getElementById("minutes").textContent = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById("seconds").textContent = String(now.getSeconds()).padStart(2, '0');
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Days together
+    const startDate = new Date("2025-05-25"); // Ganti dengan tanggal jadianmu
+    const today = new Date();
+    const diffTime = today - startDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    document.getElementById("daysTogether").textContent = diffDays;
+
+    // Page transitions
+    function goToPage2() {
+      document.getElementById("page1").classList.remove("active");
+      document.getElementById("page2").classList.add("active");
+    }
+    function goToPage1() {
+      document.getElementById("page2").classList.remove("active");
+      document.getElementById("page1").classList.add("active");
+    }
+
+    // Develop photo
+    const photoImg = document.querySelector(".js-photo-img");
+    const photos = [
+      "https://i.ibb.co/prMF5JQ6/17.jpg",
+      "https://i.ibb.co/Y7VGZjt2/1.jpg",
+      "https://i.ibb.co/PZ0Bb2Lp/2.jpg",
+      "https://i.ibb.co/mFCNf20t/3.jpg",
+      "https://i.ibb.co/JRLQF4mq/4.jpg",
+      "https://i.ibb.co/fG1DVPtq/5.jpg",
+      "https://i.ibb.co/VpLYZHWQ/6.jpg",
+      "https://i.ibb.co/B2C0QB62/8.jpg",
+      "https://i.ibb.co/XfPNshjH/12.jpg",
+      "https://i.ibb.co/tpcgwK80/11.jpg",
+      "https://i.ibb.co/Df3r4Chj/14.jpg",
+      "https://i.ibb.co/gbyM1cyb/16.jpg",
+      "https://i.ibb.co/prMF5JQ6/17.jpg"
+    ];
+    let currentIndex = 0;
+const developBtn = document.querySelector(".js-develop-button");
+developBtn.addEventListener("click", function () {
+  photoImg.src = photos[currentIndex];
+  photoImg.classList.remove("is-developed");
+  void photoImg.offsetWidth;
+  photoImg.classList.add("is-developed");
+
+  // Ubah isi tombol jadi teks
+  developBtn.textContent = "Click me again!";
+
+  currentIndex = (currentIndex + 1) % photos.length;
+});
+
+    // Heart rain
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.innerText = "💗";
+      heart.style.position = "fixed";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "-2rem";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+      heart.style.animation = "fall 5s linear forwards";
+      heart.style.opacity = 0.8;
+      heart.style.pointerEvents = "none";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
