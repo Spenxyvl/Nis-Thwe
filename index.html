@@ -111,7 +111,7 @@
   </style>
 </head>
 
-<body onclick="playAudio()">
+<body>
   <audio id="myAudio" autoplay muted loop>
     <source src="FL.mp3" type="audio/mp3">
   </audio>
@@ -121,20 +121,20 @@
     <h1>Happy 2 Months Anniversary, Myat Thwe 💗</h1>
     <div class="quote">I want to be with you, always and forever 💞</div>
 
-<div style="display: flex; justify-content: center; gap: 40px;">
-  <div style="text-align: center;">
-    <img src="https://media.tenor.com/kFxWdKGFsJgAAAAj/bubu-dudu-sseeyall.gif" class="avt">
-    <p style="margin: 0.5rem 0 0; font-weight: bold;">My Prettiest!💗</p>
-  </div>
-  <div style="text-align: center;">
-    <img src="https://media.tenor.com/CNJSyzMIkskAAAAj/bubu-dudu-sseeyall.gif" class="avt">
-    <p style="margin: 0.5rem 0 0; font-weight: bold;">Me💗</p>
-  </div>
-</div>
+    <div style="display: flex; justify-content: center; gap: 40px;">
+      <div style="text-align: center;">
+        <img src="https://s6.ezgif.com/tmp/ezgif-66a17b0b774ac0.gif" class="avt">
+        <p style="margin: 0.5rem 0 0; font-weight: bold;">My Prettiest!💗</p>
+      </div>
+      <div style="text-align: center;">
+        <img src="https://media.tenor.com/CNJSyzMIkskAAAAj/bubu-dudu-sseeyall.gif" class="avt">
+        <p style="margin: 0.5rem 0 0; font-weight: bold;">Me💗</p>
+      </div>
+    </div>
 
     <div id="days-section">
       <div style="font-size: 64px;">❤</div>
-      <div><span id="daysTogether">0</span> days of us &lt;3</div>
+      <div><span id="daysTogether">0</span> days of us 💞</div>
     </div>
 
     <div class="time-container">
@@ -157,94 +157,101 @@
   </div>
 
   <script>
-    // Autoplay music when loaded
-    const audio = document.getElementById("myAudio");
-    window.addEventListener("DOMContentLoaded", function () {
+    // Simple password prompt
+    const correctPassword = "iloveubae"; // Ganti password di sini
+    function askPassword() {
+      const userInput = prompt("Please enter the password to view this page:");
+      if (userInput === correctPassword) {
+        document.body.style.display = "block";
+      } else {
+        alert("Wrong password! You can ask me for the password😘.");
+        document.body.innerHTML = "<h2 style='text-align:center; margin-top: 20vh;'>Access Denied</h2>";
+      }
+    }
+    // Sembunyikan dulu body sampai password benar
+    document.body.style.display = "none";
+
+    window.onload = () => {
+      askPassword();
+
+      // Autoplay music when loaded
+      const audio = document.getElementById("myAudio");
       setTimeout(() => {
         audio.muted = false;
         audio.play().catch(() => {});
       }, 500);
-    });
 
-    // Fallback if autoplay is blocked
-    function playAudio() {
-      audio.muted = false;
-      audio.play().catch(() => {});
-    }
+      // Clock
+      function updateClock() {
+        const now = new Date();
+        document.getElementById("hours").textContent = String(now.getHours()).padStart(2, '0');
+        document.getElementById("minutes").textContent = String(now.getMinutes()).padStart(2, '0');
+        document.getElementById("seconds").textContent = String(now.getSeconds()).padStart(2, '0');
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
 
-    // Clock
-    function updateClock() {
-      const now = new Date();
-      document.getElementById("hours").textContent = String(now.getHours()).padStart(2, '0');
-      document.getElementById("minutes").textContent = String(now.getMinutes()).padStart(2, '0');
-      document.getElementById("seconds").textContent = String(now.getSeconds()).padStart(2, '0');
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+      // Days together
+      const startDate = new Date("2025-05-25"); // Ganti dengan tanggal jadianmu
+      const today = new Date();
+      const diffTime = today - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      document.getElementById("daysTogether").textContent = diffDays;
 
-    // Days together
-    const startDate = new Date("2025-05-25"); // Ganti dengan tanggal jadianmu
-    const today = new Date();
-    const diffTime = today - startDate;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById("daysTogether").textContent = diffDays;
+      // Page transitions
+      window.goToPage2 = function() {
+        document.getElementById("page1").classList.remove("active");
+        document.getElementById("page2").classList.add("active");
+      }
+      window.goToPage1 = function() {
+        document.getElementById("page2").classList.remove("active");
+        document.getElementById("page1").classList.add("active");
+      }
 
-    // Page transitions
-    function goToPage2() {
-      document.getElementById("page1").classList.remove("active");
-      document.getElementById("page2").classList.add("active");
-    }
-    function goToPage1() {
-      document.getElementById("page2").classList.remove("active");
-      document.getElementById("page1").classList.add("active");
-    }
+      // Develop photo
+      const photoImg = document.querySelector(".js-photo-img");
+      const photos = [
+        "https://i.ibb.co/prMF5JQ6/17.jpg",
+        "https://i.ibb.co/Y7VGZjt2/1.jpg",
+        "https://i.ibb.co/PZ0Bb2Lp/2.jpg",
+        "https://i.ibb.co/mFCNf20t/3.jpg",
+        "https://i.ibb.co/JRLQF4mq/4.jpg",
+        "https://i.ibb.co/fG1DVPtq/5.jpg",
+        "https://i.ibb.co/VpLYZHWQ/6.jpg",
+        "https://i.ibb.co/B2C0QB62/8.jpg",
+        "https://i.ibb.co/XfPNshjH/12.jpg",
+        "https://i.ibb.co/tpcgwK80/11.jpg",
+        "https://i.ibb.co/Df3r4Chj/14.jpg",
+        "https://i.ibb.co/gbyM1cyb/16.jpg",
+        "https://i.ibb.co/prMF5JQ6/17.jpg"
+      ];
+      let currentIndex = 0;
+      const developBtn = document.querySelector(".js-develop-button");
+      developBtn.addEventListener("click", function () {
+        photoImg.src = photos[currentIndex];
+        photoImg.classList.remove("is-developed");
+        void photoImg.offsetWidth;
+        photoImg.classList.add("is-developed");
+        developBtn.textContent = "Click here again!🤓";
+        currentIndex = (currentIndex + 1) % photos.length;
+      });
 
-    // Develop photo
-    const photoImg = document.querySelector(".js-photo-img");
-    const photos = [
-      "https://i.ibb.co/prMF5JQ6/17.jpg",
-      "https://i.ibb.co/Y7VGZjt2/1.jpg",
-      "https://i.ibb.co/PZ0Bb2Lp/2.jpg",
-      "https://i.ibb.co/mFCNf20t/3.jpg",
-      "https://i.ibb.co/JRLQF4mq/4.jpg",
-      "https://i.ibb.co/fG1DVPtq/5.jpg",
-      "https://i.ibb.co/VpLYZHWQ/6.jpg",
-      "https://i.ibb.co/B2C0QB62/8.jpg",
-      "https://i.ibb.co/XfPNshjH/12.jpg",
-      "https://i.ibb.co/tpcgwK80/11.jpg",
-      "https://i.ibb.co/Df3r4Chj/14.jpg",
-      "https://i.ibb.co/gbyM1cyb/16.jpg",
-      "https://i.ibb.co/prMF5JQ6/17.jpg"
-    ];
-    let currentIndex = 0;
-const developBtn = document.querySelector(".js-develop-button");
-developBtn.addEventListener("click", function () {
-  photoImg.src = photos[currentIndex];
-  photoImg.classList.remove("is-developed");
-  void photoImg.offsetWidth;
-  photoImg.classList.add("is-developed");
-
-  // Ubah isi tombol jadi teks
-  developBtn.textContent = "Click me again!";
-
-  currentIndex = (currentIndex + 1) % photos.length;
-});
-
-    // Heart rain
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.innerText = "💗";
-      heart.style.position = "fixed";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.top = "-2rem";
-      heart.style.fontSize = Math.random() * 20 + 20 + "px";
-      heart.style.animation = "fall 5s linear forwards";
-      heart.style.opacity = 0.8;
-      heart.style.pointerEvents = "none";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-    setInterval(createHeart, 400);
+      // Heart rain
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.innerText = "💗";
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "-2rem";
+        heart.style.fontSize = Math.random() * 20 + 20 + "px";
+        heart.style.animation = "fall 5s linear forwards";
+        heart.style.opacity = 0.8;
+        heart.style.pointerEvents = "none";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+      setInterval(createHeart, 400);
+    };
   </script>
 </body>
 </html>
