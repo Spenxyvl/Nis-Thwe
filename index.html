@@ -108,6 +108,25 @@
         opacity: 0;
       }
     }
+
+    /* Tombol play/pause musik */
+    #musicBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 22px;
+      background: rgba(255,255,255,0.7);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+    #musicBtn:hover {
+      background: rgba(255,255,255,0.9);
+    }
   </style>
 </head>
 
@@ -115,6 +134,8 @@
   <audio id="myAudio" autoplay muted loop>
     <source src="FL.mp3" type="audio/mp3">
   </audio>
+
+  <button id="musicBtn">🎵</button>
 
   <!-- Page 1 -->
   <div id="page1" class="page active">
@@ -163,6 +184,11 @@
       const userInput = prompt("Please enter the password to view this page:");
       if (userInput === correctPassword) {
         document.body.style.display = "block";
+
+        // Musik otomatis play setelah password benar
+        const audio = document.getElementById("myAudio");
+        audio.muted = false;
+        audio.play().catch(()=>{});
       } else {
         alert("Wrong password! You can ask me for the password😘.");
         document.body.innerHTML = "<h2 style='text-align:center; margin-top: 20vh;'>Access Denied</h2>";
@@ -173,13 +199,6 @@
 
     window.onload = () => {
       askPassword();
-
-      // Autoplay music when loaded
-      const audio = document.getElementById("myAudio");
-      setTimeout(() => {
-        audio.muted = false;
-        audio.play().catch(() => {});
-      }, 500);
 
       // Clock
       function updateClock() {
@@ -251,6 +270,19 @@
         setTimeout(() => heart.remove(), 5000);
       }
       setInterval(createHeart, 400);
+
+      // Tombol Play/Pause musik
+      const audioBtn = document.getElementById("musicBtn");
+      const audio = document.getElementById("myAudio");
+      audioBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          audioBtn.textContent = "🎵";
+        } else {
+          audio.pause();
+          audioBtn.textContent = "⏸️";
+        }
+      });
     };
   </script>
 </body>
